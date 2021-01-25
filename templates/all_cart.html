@@ -1,0 +1,64 @@
+{% extends 'home.html' %}
+{% block content %}
+    
+    
+
+    <ol>
+        {% for carts in cart %}
+        <li>
+            
+        <h4>{{carts.user.first_name}} &nbsp; {{carts.user.last_name}}</h4>
+            
+            <table class="table table-light table-bordered table-striped">
+                <tbody>
+                    {% if carts.user.total %}
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Final Item Price</th>
+                    </tr>
+                    {%endif%} 
+                    {% if carts.cartitem %}
+                        {% for item in carts.cartitem %}
+                            <tr>
+                                <td>{{item.item_name}}</td>
+                                <td>{{item.qnty}}</td>
+                                <td>{{item.item_price}}</td>
+                                <td>{{item.final_price}}</td>
+                            </tr>
+                        {%endfor%}
+                    {%else%}
+                            <tr> <td> No Item in cart</td></tr>
+                    {%endif%}  
+                    {%if carts.total %}  
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>total price</td>
+                        <td>{{carts.total}}</td>
+                    </tr>
+                    {%endif%} 
+                    {%if carts.discounted_price %}    
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Discounted price</td>
+                        <td>{{carts.discounted_price}}</td>
+                    </tr> 
+                    {%endif%}    
+                </tbody>
+            </table>
+            <br>
+            <br>
+             
+        </li> 
+        {%endfor%}    
+    </ol>
+    
+   
+   
+       
+        
+
+{% endblock content %}

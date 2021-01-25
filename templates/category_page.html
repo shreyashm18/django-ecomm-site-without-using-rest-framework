@@ -1,0 +1,26 @@
+{% extends 'home.html' %}
+{% block content %}
+    
+    <h3>{{categorys}} </h3>
+        
+
+        {% if categorys.product %}
+        <ol>
+            {% for product in categorys.product %}
+            
+                <li> {{product.product_name}}  
+                    <br>
+                    {% if request.role == 'Admin' %}
+                    <a href="{% url 'update_prod' product.id %}" class="btn btn-sm btn-outline-secondary" id = '{{product.id}}'>edit</a>
+                    <a href="{% url 'delete_prod' product.id %}" class="btn btn-sm btn-outline-secondary" id = '{{product.id}}'>delete</a>
+                    {% elif not request.role == 'Admin' %}
+                    <a href="{% url 'detail_prod' product.id %}" class="btn btn-sm btn-outline-secondary" id = '{{product.id}}'>Detail</a>
+                    {%endif%}
+                
+                </li>  
+            {%endfor%}
+        </ol>
+        {%endif%}
+        
+
+{% endblock content %}

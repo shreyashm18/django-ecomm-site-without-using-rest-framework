@@ -1,0 +1,56 @@
+{% extends 'home.html' %}
+{% block content %}
+    
+    <h3>Hello {{cart.cart_name}}, {{msg}} </h3>
+
+        {% if cart.cartitem %}
+        <table class="table table-light table-bordered table-striped">
+        <tbody>
+            
+        <tr>
+            <th>Item Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Final Item Price</th>
+        </tr>
+        {% for cart in cart.cartitem %}
+        <tr>
+            <td>{{cart.item_name}}</td>
+            <td>{{cart.qnty}} &nbsp; 
+                
+                        <a href="{% url 'add_to_cart' cart.prod_id %}" class="btn btn-warning" id = '{{cart.prod_id}}'>Add Quantity</a>   
+                        <a href="{% url 'remove_from_cart' cart.prod_id %}" class="btn btn-danger" id = '{{cart.prod_id}}'>Remove 1 quantity</a>
+                </div>
+            </td>
+            <td>{{cart.item_price}}</td>
+            <td>{{cart.final_price}}</td>
+        </tr>
+        
+            {%endfor%}
+        <tr>
+            <td></td>
+            <td></td>
+            <td>total price</td>
+            <td>{{total}}</td>
+        </tr>
+        {%if new_price %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td>Discounted price</td>
+            <td>{{new_price}}</td>
+        </tr>
+        {%endif%}
+        </ol>
+        {%endif%}
+        </tbody>
+       <br>
+       <br>
+       {%if dis_msg%}
+       <h5>{{dis_msg}}</h5>
+       {%endif%}
+       <br>
+       
+        
+
+{% endblock content %}

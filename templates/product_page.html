@@ -1,0 +1,55 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
+    <title>Document</title>
+    <style>
+      .tab {
+        tab-size: 2;
+    }
+    </style>
+</head>
+<body>
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row">
+        {% for prod in products %}
+          <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+              <h5 class="card-title"><center>{{ prod.product_name }}</center></h5>
+              <img class="card-img-top" src="{{ prod.image.url }}" alt="Card image cap">
+              <div class="card-body">
+                <p class="card-text">{{ prod.description | slice:":100" }}...</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    {% if request.role == 'Admin' %}
+                    <a href="{% url 'update_prod' prod.id %}" class="btn btn-sm btn-outline-secondary" id = '{{prod.id}}'>edit</a>
+                    <a href="{% url 'delete_prod' prod.id %}" class="btn btn-sm btn-outline-secondary" id = '{{prod.id}}'>delete</a>
+                    {% elif not request.role == 'Admin' %}
+                    <a href="{% url 'detail_prod' prod.id %}" class="btn btn-sm btn-outline-secondary" id = '{{prod.id}}'>View</a>
+                    <a href="{% url 'add_to_cart' prod.id %}" class="btn btn-sm btn-outline-secondary" id = '{{prod.id}}'>Add to cart</a>
+                    {%endif%}
+                    </div>
+                  <small class="text-muted">{{prod.category}}</small>
+                  <strong >{{prod.price}} Rs</strong>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>   
+    
+</body>
+{% endblock content %}
+</html>

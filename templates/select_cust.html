@@ -1,0 +1,25 @@
+{% extends 'home.html' %}
+{% block content %}
+{% if request.role == 'Admin' %}
+<div class="container" style="height:70vh;">
+    <div class="row">
+     <form method="POST" class="col s12 form" action="{% url 'all_carts'  %}">
+        {% csrf_token %}
+        <table class = 'w-50 table table-light' style="border-radius:10px;background-color:#ffffff;">
+        {% for field in form %}
+        <tr>
+            <th>{{field.label}}</th>
+            <td>{{ field }}</td>
+        </tr>
+        {% endfor %} <br>
+        
+        </table>
+        <button class="btn btn-outline-success input-field col s6 m4 offset-m4 offset-s3" type="submit">Submit</button>
+        
+      </form>
+  </div>
+  {% elif not request.role == 'Admin' %}
+    <h3>You dont have permission to see this page</h3>
+  {%endif%}
+
+{% endblock content %}

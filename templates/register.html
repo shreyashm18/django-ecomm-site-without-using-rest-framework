@@ -1,0 +1,21 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+<form action="{% url 'register' %}" method="POST">
+    {% csrf_token %}
+    
+    
+        Employee First Name       :<input type="text" name="firstname" placeholder="First Name"><br>
+        Employee Last Name       :<input type="text" name="lastname" placeholder="Last Name"><br>
+        Email            :<input type="email" name="email" placeholder="Email"><br>
+        Username         :<input type="text" name="username" placeholder="User Name"><br>
+        Password         :<input type="password" name="password1" placeholder="Password"><br>
+        Confirm Password :<input type="password" name="password2" placeholder="Confirm Password"><br>
+        <input type="submit" />
+
+    
+
+</form>
+
+{% endblock content %}
